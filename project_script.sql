@@ -105,3 +105,19 @@ GO
 
 EXEC GetSalesSummary;
 
+USE SalesDB;
+GO
+
+CREATE VIEW v_SalesDailyReport
+AS
+SELECT 
+	O.OrderID AS [เลขที่ออเดอร์],
+	P.ProductName AS [ชื่อสินค้า],
+	P.Price AS [ราคาต่อชิ้น],
+	O.Quantity AS [จำนวนที่ซื้อ],
+	(P.Price * O.Quantity) AS [ยอดรวมสุทธิ์],
+	O.OrderDate AS [วันที่สั่งซื้อ]
+FROM  Orders O WITH (NOLOCK)
+INNER JOIN Products P ON O.ProductID = P.ProductID;
+GO
+
