@@ -134,4 +134,12 @@ GO
 TRUNCATE TABLE Orders;
 GO
 
+USE SalesDB;
+GO
+
+CREATE NONCLUSTERED INDEX IX_Products_ProductName
+ON Products (ProductName);
+GO
+
+
 
