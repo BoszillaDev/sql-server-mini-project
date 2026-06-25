@@ -87,4 +87,21 @@ GROUP BY P.ProductName
 ORDER BY [รายได้รวมสุทธิ] DESC
 GO
 
+CREATE PROCEDURE GetSalesSummary
+AS
+BEGIN
+	SELECT 
+		P.ProductName AS [ชื่อสินค้า],
+		COUNT(O.OrderID) AS [จำนวนครั้งที่ออเดอร์เข้า],
+		SUM(O.Quantity) AS [จำนวนชิ้นรวมที่ขายได้],
+		SUM(P.Price*O.Quantity) AS [รายได้รวมสุทธิ],
+		AVG(P.Price*O.Quantity) AS [ยอกซื้แเฉลี่ยนต่อออเดอร์]
+	FROM Orders O WITH (NOLOCK)
+	INNER JOIN Products P ON O.ProductID = P.ProductID
+	GROUP BY P.ProductName
+	ORDER BY [รายได้รวมสุทธิ] DESC;	
+END;
+GO
+
+EXEC GetSalesSummary;
 
