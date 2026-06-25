@@ -121,3 +121,17 @@ FROM  Orders O WITH (NOLOCK)
 INNER JOIN Products P ON O.ProductID = P.ProductID;
 GO
 
+
+USE SalesDB;
+GO
+
+DELETE FROM Orders 
+WHERE OrderID = 2;
+GO
+
+USE SalesDB;
+GO
+TRUNCATE TABLE Orders;
+GO
+
+
